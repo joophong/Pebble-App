@@ -1,0 +1,53 @@
+ 
+Technical Documentation:
+
+Structure of messages:
+
+  Messages sent from the user interface to the middleware are in the form of
+  single digits appended to the URL. These numbers are defined as constants
+  on both sides. For example const int CELSIUS = 1.
+  
+  Messages sent from the middleware to the user interface consist of a JSON
+  object with a single key msg whose value is the string to be displayed.
+  The '$' symbol is used in place of newline.  
+  For example:
+  
+    { msg : Temp 25.01$Average 24.43 }
+    
+  Messages sent from the middleware to the sensor/display consist of the first
+  letter of the desired mode capitalized. For example 'F' for fahrenheit.
+  The time is sent to the sensor as 0 or more dollar signs followed by the four
+  digit time and terminated by '^'. For example $$2142^
+  
+  Messages sent from the sensor/display to the middleware consist of the
+  temperature followed by a 'C' if in celsius or an 'F' if in fahrenheit. 
+  The middleware converts any fahrenheit temperatures into celsius to be stored. 
+  
+Average Temperature:
+
+  Keeping track of the average temperature is done on an hourly basis. During
+  the hour running total and count of all the temperatures read is kept and used
+  to calculate the average. When an hour has passed the current average is saved
+  to a queue and the current total and count are reset. If the queue already
+  contains 23 averages then the first one is removed.  When the average temperature
+  is requested the current average is averaged with the averages in the queue
+  and sent to the user interface.
+  
+Additional Features:
+
+  Morse Code:
+  In morse code mode clicking the select button sends a "dot" to the arduino
+  causing the light to flash blue. If the select button is long pressed a 
+  "dash" is sent causing the light to flash purple.
+  
+  Time Mode:
+  In time mode the arduino displays the current time in 24 hour format on the 
+  7 segment display. The time is calculated on the middleware and sent periodically
+  to the arduino as long as it is in time mode.
+  
+  Graph Mode:
+  Graph modes displays a simple text graph of the relative differences between
+  the last 5 hourly averages. At the top is displayed the lowest, average, and highest
+  values respectively.
+  
+

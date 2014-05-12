@@ -1,0 +1,23 @@
+User Documentation:
+
+The app has the following five modes which may be cycled through by pressing the
+down button.
+  
+  Celsius - The current temperature, average, high, and low temperatures are
+    displayed in Celsius.
+    
+  Fahrenheit - The current temperature, average, high, and low temperatures are
+    displayed in Fahrenheit.
+    
+  Morse Code - In this mode pressing the select button sends a "dot" to the arduino
+    RGB light. Long pressing the select button sends a "dash".
+    
+  Time - While in this mode the time is displayed on the arduino 7 segment display.
+  
+  Graph - In this mode a graph of the relative differences in the hourly temperatures
+    for up to the past 5 hours is displayed
+    
+In addition pressing the up button in any mode sets the arduino into standby mode 
+where it stops reporting the temperature and displays all zeros. Pressing the select
+button in any mode except Morse Code mode refreshes the display. Pressing back at
+any point will leave the application.
